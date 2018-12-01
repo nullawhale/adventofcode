@@ -2,3 +2,6 @@
 name = "adventofcode"
 version = "0.1.0"
 authors = ["NullaWhale <kura98.21@gmail.com>"]
+
+[dependencies]
+regex = "1"

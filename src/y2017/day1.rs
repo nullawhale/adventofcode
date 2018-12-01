@@ -1,5 +1,4 @@
 pub fn run(bytes: Vec<u8>) {
-
     println!("{}", star_1(bytes.clone()));
     println!("{}", star_2(bytes.clone()));
 }
@@ -14,7 +13,7 @@ pub fn star_1(mut bytes: Vec<u8>) -> usize {
     let len = b.len();
 
     for i in 0..len-1 {
-        if (b[i] == b[i + 1]) {
+        if b[i] == b[i + 1] {
             sum += b[i] as usize;
         }
     }

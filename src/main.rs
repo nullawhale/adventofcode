@@ -21,6 +21,7 @@ fn main() {
     if year == 2018 {
         match day {
             1 => y2018::day1::run(read_lines(year, day)),
+            2 => y2018::day2::run(read_lines(year, day)),
 
             _ => println!("\nSomething wrong, try to enter another day"),
         }

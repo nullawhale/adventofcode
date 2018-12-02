@@ -14,16 +14,16 @@ fn star1(vs: Vec<String>) -> isize {
 fn star2(vs: Vec<String>) -> isize {
     let mut sum: isize = 0isize;
     let cs: Vec<isize> = vs.iter().map(|x| x.parse::<isize>().unwrap()).collect();
-    let mut hashSet = HashSet::new();
+    let mut hash_set = HashSet::new();
     //hashSet.insert(0isize);
 
     loop {
         for c in &cs {
             sum += c;
-            if hashSet.contains(&sum) {
+            if hash_set.contains(&sum) {
                 return sum;
             } else {
-                hashSet.insert(sum);
+                hash_set.insert(sum);
             }
         }
     }

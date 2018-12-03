@@ -3,13 +3,10 @@ use self::regex::Regex;
 use std::collections::HashMap;
 use std::collections::HashSet;
 
-#[derive(Debug)]
 struct Point {
     id: u32,
-    x:  u32,
-    y:  u32,
-    x1: u32,
-    y1: u32,
+    x:  u32, y:  u32,
+    x1: u32, y1: u32,
 }
 
 pub fn run(vs: Vec<String>) {
@@ -26,12 +23,7 @@ fn star1_star2(vs: Vec<String>) -> (usize, u32) {
     for s in vs.iter() {
         let mut point: Point = parse_point(s.to_string());
         points.push(point);
-        //println!("{:?}", point.x);
-        //println!("{} {} {} {} {}", &cap[1], &cap[2], &cap[3], &cap[4], &cap[5]);
-        //vs.iter().for_each(|s| println!("{}", s));
     }
-
-    //points.iter().map(|p| all_points.insert(p.id));
 
     for point in points.iter() {
         all_points.insert(point.id);
@@ -67,7 +59,3 @@ fn parse_point(s: String) -> Point {
 
     return point;
 }
-
-// #1 @ 1,3: 4x4
-// #2 @ 3,1: 4x4
-// #3 @ 5,5: 2x2

@@ -1,7 +1,7 @@
-use std::fmt;
 extern crate regex;
 use self::regex::Regex;
 use std::collections::HashMap;
+use std::collections::HashSet;
 
 #[derive(Debug)]
 struct Point {
@@ -12,19 +12,17 @@ struct Point {
     y1: u32,
 }
 
-impl fmt::Display for Point {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "x: {}, y: {}", self.x, self.y)
-    }
-}
-
 pub fn run(vs: Vec<String>) {
-    println!("{}", star1(vs));
+    let (star1, star2) = star1_star2(vs);
+    println!("{}\n{}", star1, star2);
 }
 
-fn star1(vs: Vec<String>) -> usize {
+fn star1_star2(vs: Vec<String>) -> (usize, u32) {
     let mut points: Vec<Point> = Vec::new();
     let mut mapa = HashMap::new();
+    let mut claim = HashMap::new();
+    let mut all_points = HashSet::new();
+    let mut cross_points = HashSet::new();
     for s in vs.iter() {
         let mut point: Point = parse_point(s.to_string());
         points.push(point);
@@ -33,15 +31,27 @@ fn star1(vs: Vec<String>) -> usize {
         //vs.iter().for_each(|s| println!("{}", s));
     }
 
+    //points.iter().map(|p| all_points.insert(p.id));
+
     for point in points.iter() {
+        all_points.insert(point.id);
         for x in point.x..point.x + point.x1 {
             for y in point.y..point.y + point.y1 {
                 *mapa.entry((x, y)).or_insert(0) += 1;
+                if claim.contains_key(&(x, y)) {
+                    cross_points.insert(point.id);
+                    cross_points.insert(claim[&(x, y)]);
+                } else {
+                    claim.insert((x, y), point.id);
+                }
             }
         }
     }
 
-    return mapa.values().filter(|p| **p > 1).count();
+    return (
+        mapa.values().filter(|p| **p > 1).count(),
+        *all_points.difference(&cross_points).next().unwrap()
+    )
 }
 
 fn parse_point(s: String) -> Point {

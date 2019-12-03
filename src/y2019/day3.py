@@ -18,10 +18,8 @@ def calc_coords(wire):
         for _ in range(0, n):
             x += _x
             y += _y
-            steps += abs(_x) + abs(_y)
-            cord = str(x) + ', ' + str(y)
-            coords[cord] = steps
-
+            steps += 1
+            coords[(x, y)] = steps
 
     return coords
 
@@ -35,14 +33,13 @@ def calculations():
     wire_1_map = calc_coords(wire_1.split(','))
     wire_2_map = calc_coords(wire_2.split(','))
 
-    all_coords = set(list(wire_1_map.keys())).intersection(list(wire_2_map.keys()))
+    all_coords = wire_1_map.keys() & wire_2_map.keys()
     min_steps = min([wire_1_map[c] + wire_2_map[c] for c in all_coords])
     print('second star: ' + str(min_steps))
 
     distances = []
 
     for c in all_coords:
-        c = c.split(',')
         distances.append(Methods.manhattan(c[0], c[1]))
 
     return min(distances)

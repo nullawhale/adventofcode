@@ -8,4 +8,4 @@ class Methods:
         return abs(int(a)) + abs(int(b))
 
 if __name__ == '__main__':
-    print('methods')
+    print('default methods')
